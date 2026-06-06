@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+
+  servidor:
+    build: .
+    container_name: servidor_redes
+    tty: true
+
+    cap_add:
+      - NET_ADMIN
+
+    ports:
+      - "5000:5000"
+      - "6000:6000"
+
+  cliente:
+    build: .
+    container_name: cliente_redes
+    tty: true
+
+    cap_add:
+      - NET_ADMIN
