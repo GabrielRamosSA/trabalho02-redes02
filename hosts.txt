@@ -1,0 +1,1 @@
+www.meusite.local 172.30.0.10

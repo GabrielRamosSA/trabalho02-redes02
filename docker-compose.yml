@@ -2,22 +2,39 @@ version: '3'
 
 services:
 
-  servidor:
+  servidor_dns:
     build: .
-    container_name: servidor_redes
+    container_name: servidor_dns
     tty: true
-
     cap_add:
       - NET_ADMIN
+    networks:
+      rede_trabalho:
+        ipv4_address: 172.30.0.53
 
-    ports:
-      - "5000:5000"
-      - "6000:6000"
-
-  cliente:
+  servidor_web:
     build: .
-    container_name: cliente_redes
+    container_name: servidor_web
     tty: true
-
     cap_add:
       - NET_ADMIN
+    networks:
+      rede_trabalho:
+        ipv4_address: 172.30.0.10
+
+  cliente_web:
+    build: .
+    container_name: cliente_web
+    tty: true
+    cap_add:
+      - NET_ADMIN
+    networks:
+      rede_trabalho:
+        ipv4_address: 172.30.0.20
+
+networks:
+  rede_trabalho:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.30.0.0/24
